@@ -11,8 +11,8 @@ const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const baseURI = "http://localhost:5000"
-  // const baseURI = "http://localhost:5000"
+  const baseURI = "https://ankur-handicraft.onrender.com"
+  // const baseURI = "https://ankur-handicraft.onrender.com"
 
   useEffect(() => {
     fetch(`${baseURI}/api/products`)

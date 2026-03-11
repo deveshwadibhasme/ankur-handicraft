@@ -16,7 +16,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products/featured")
+    fetch("https://ankur-handicraft.onrender.com/api/products/featured")
       .then((res) => res.json())
       .then((data) => {
         setFeaturedProducts(data);
