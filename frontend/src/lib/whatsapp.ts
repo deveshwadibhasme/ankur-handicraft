@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "8048201272";
+const WHATSAPP_NUMBER = "918048201272";
 const DEFAULT_MESSAGE = "Hello, I am interested in your furniture from Ankur Handicraft.";
 
 export const getWhatsAppUrl = (message: string = DEFAULT_MESSAGE) =>
