@@ -2,6 +2,7 @@
 node_modules/
 /.pnp
 .pnp.js
+.env
 
 # testing
 /coverage
@@ -10,7 +11,6 @@ node_modules/
 /build
 /dist
 products-sample/
-ui/
 
 # misc
 .DS_Store
