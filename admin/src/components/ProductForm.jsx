@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 const emptyForm = {
   name: "",
   description: "",
+  material: "",
+  category: "",
+  price: "",
+  dimensions: "",
   imageFile: null,
   isFeatured: false,
 };
@@ -21,12 +25,16 @@ function ProductForm({
       setForm({
         name: initialValue.name || "",
         description: initialValue.description || "",
+        material: initialValue.material || "",
+        category: initialValue.category || "",
+        price: initialValue.price || "",
+        dimensions: initialValue.dimensions || "",
         isFeatured: initialValue.isFeatured || false,
         imageFile: null,
       });
       return;
     }
-    setForm(emptyForm);
+    // setForm(emptyForm);
   }, [initialValue]);
 
   const handleSubmit = async (event) => {
@@ -69,6 +77,76 @@ function ProductForm({
           required
           rows={4}
         />
+      </div>
+
+      <div className="flex w-full gap-5">
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Category
+          </label>
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={form.category}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, category: event.target.value }))
+            }
+            required
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            <option value="memento-corporate">Memento & Corporate</option>
+            <option value="traditional">Traditional</option>
+            <option value="religious-art">Religious Art</option>
+          </select>
+        </div>
+
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Material Type
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Wood, Brass, Ceramic"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={form.material}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, material: event.target.value }))
+            }
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Price
+          </label>
+          <input
+            type="number"
+            placeholder="0.00"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={form.price}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, price: event.target.value }))
+            }
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Dimensions
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. 10x10x5 cm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            value={form.dimensions}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, dimensions: event.target.value }))
+            }
+          />
+        </div>
       </div>
 
       <div>

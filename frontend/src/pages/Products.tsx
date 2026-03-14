@@ -1,31 +1,44 @@
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
+import { useLocation } from "react-router-dom";
 
 interface Product {
   image: string;
   name: string;
   description: string;
+  material?: string;
+  category: string;
+  price?: number;
+  dimensions?: string;
+  isFeatured?: boolean;
 }
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const { pathname } = useLocation()
 
-  const baseURI = "https://ankur-handicraft.onrender.com"
-  // const baseURI = "https://ankur-handicraft.onrender.com"
+  const baseURI =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : "https://ankur-handicraft.onrender.com";
 
   useEffect(() => {
-    fetch(`${baseURI}/api/products`)
-      .then((res) => res.json())
-      .then((data) => {
+    const path = pathname.split("/")[2];
+    setLoading(true);
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`${baseURI}/api/products/${path || "all-products"}`);
+        const data = await res.json();
         setProducts(data);
         setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Error fetching products:", err);
         setLoading(false);
-      });
-  }, []);
+      }
+    }
+    fetchProduct()
+  }, [pathname]);
 
   return (
     <main className="pt-20">

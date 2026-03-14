@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import heroImg from "@/assets/hero-furniture.jpg";
+import heroImg from "/bg-image.png";
 import ProductCard from "@/components/ProductCard";
 import { useEffect, useState } from "react";
 
@@ -12,11 +12,16 @@ import { useEffect, useState } from "react";
 // ];
 
 const Index = () => {
+  const BASE_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : "https://ankur-handicraft.onrender.com";
+
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://ankur-handicraft.onrender.com/api/products/featured")
+    fetch(`${BASE_URL}/api/products/featured`)
       .then((res) => res.json())
       .then((data) => {
         setFeaturedProducts(data);
@@ -38,10 +43,10 @@ const Index = () => {
       <div className="container relative z-10 py-20">
         <div className="max-w-2xl animate-fade-in-up">
           <h1 className="font-heading text-4xl md:text-6xl font-bold text-primary-foreground leading-tight mb-6">
-            Handcrafted Furniture That Brings Art Into Your Home
+            Handcrafted Metal Art That Brings Elegance Into Your Home
           </h1>
           <p className="text-primary-foreground/85 text-lg md:text-xl font-body mb-8 leading-relaxed">
-            Every piece at Ankur Handicraft is a labour of love — carved, shaped, and finished by skilled artisans using time-honoured techniques.
+            Every piece at Ankur Handicraft is a labour of love — forged, shaped, and finished by skilled artisans using time-honoured metalworking techniques.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -68,7 +73,7 @@ const Index = () => {
       <div className="container max-w-3xl text-center">
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Welcome to Ankur Handicraft</h2>
         <p className="text-muted-foreground text-lg leading-relaxed">
-          Founded with a passion for preserving heritage, Ankur Handicraft creates furniture and artistic wooden decor. We blend traditional craftsmanship with contemporary aesthetics to deliver pieces that are functional, beautiful, and built to last generations.
+          Founded with a passion for preserving heritage, Ankur Handicraft creates exquisite metal craft and artistic decor. We blend traditional metalworking craftsmanship with contemporary aesthetics to deliver pieces that are functional, beautiful, and built to last generations.
         </p>
       </div>
     </section>

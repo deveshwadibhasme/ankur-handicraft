@@ -1,4 +1,7 @@
-const BASE_URL = "https://ankur-handicraft.onrender.com";
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://ankur-handicraft.onrender.com";
 
 const getToken = () => localStorage.getItem("admin_token");
 
