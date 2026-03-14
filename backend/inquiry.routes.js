@@ -1,6 +1,8 @@
 import express from 'express';
 import Inquiry from './model/Inquiry.js';
 import jwt from 'jsonwebtoken';
+import { sendInquiryEmail } from './email.service.js';
+import Product from './model/Product.js';
 
 
 const router = express.Router();
@@ -19,24 +21,28 @@ const protect = (req, res, next) => {
     }
 };
 
-router.post('/api/inquiries', async (req, res) => {
+router.post('/add', async (req, res) => {
     try {
-        const { name, email, phone, message, product } = req.body;
+        const { userName, email, number, message, product } = req.body;
         const newInquiry = new Inquiry({
-            name,
+            userName,
             email,
-            phone,
+            number,
             message,
             product
         });
+
+        // const productDoc = product ? await Product.findById(product) : null;
+
         await newInquiry.save();
+        // await sendInquiryEmail({ userName, email, number, message, productName: productDoc?.name });
         res.status(201).json({ type: 'success', message: 'Inquiry sent successfully' });
     } catch (error) {
         res.status(400).json({ type: 'error', message: error.message });
     }
 });
 
-router.get('/api/inquiries', protect, async (req, res) => {
+router.get('/all-inquries', protect, async (req, res) => {
     try {
         const inquiries = await Inquiry.find().sort({ createdAt: -1 });
         res.json(inquiries);
@@ -45,7 +51,7 @@ router.get('/api/inquiries', protect, async (req, res) => {
     }
 });
 
-router.delete('/api/inquiries/:id', protect, async (req, res) => {
+router.delete('/remove/:id', protect, async (req, res) => {
     try {
         await Inquiry.findByIdAndDelete(req.params.id);
         res.json({ message: 'Inquiry deleted successfully' });

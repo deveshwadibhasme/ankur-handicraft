@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Admin from './model/Admin.js';
 import productRoute from './product.route.js'
+import inquiryRouter from './inquiry.routes.js'
 
 dotenv.config();
 connectDB();
@@ -34,7 +35,7 @@ app.post('/auth/admin/login', async (req, res) => {
 });
 
 app.use('/', productRoute)
-app.use('/inquiry', productRoute)
+app.use('/inquiry', inquiryRouter)
 
 
 app.get('/', (req, res) => {
