@@ -1,9 +1,11 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import Product from './model/Product.js';
-import upload from './upload.config.js';
+import { imagekit, upload } from './upload.config.js';
 const router = express.Router()
 
+dotenv.config();
 const generateUniqueFileName = (originalName) => {
     return `${Date.now()}-${originalName}`;
 };
