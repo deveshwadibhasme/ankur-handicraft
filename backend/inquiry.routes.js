@@ -23,19 +23,19 @@ const protect = (req, res, next) => {
 
 router.post('/add', async (req, res) => {
     try {
-        const { userName, email, number, message, product } = req.body;
+        const { userName, email, number, message, productId } = req.body;
         const newInquiry = new Inquiry({
             userName,
             email,
             number,
             message,
-            product
+            product: productId
         });
 
-        const productDoc = product ? await Product.findById(product) : null;
+        const productDoc = productId ? await Product.findById(productId) : null;
 
         await newInquiry.save();
-        await sendInquiryEmail({ userName, email, number, message, productName: productDoc?.name });
+        // await sendInquiryEmail({ userName, email, number, message, productName: productDoc?.name });
         res.status(201).json({ type: 'success', message: 'Inquiry sent successfully' });
     } catch (error) {
         res.status(400).json({ type: 'error', message: error.message });
@@ -44,7 +44,7 @@ router.post('/add', async (req, res) => {
 
 router.get('/all-inquries', protect, async (req, res) => {
     try {
-        const inquiries = await Inquiry.find().sort({ createdAt: -1 });
+        const inquiries = await Inquiry.find().populate('product').sort({ createdAt: -1 });
         res.json(inquiries);
     } catch (error) {
         res.status(500).json({ message: error.message });

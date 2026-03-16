@@ -7,7 +7,7 @@ const Footer = () => (
         <div>
           <h3 className="font-heading text-xl font-bold text-foreground mb-3">Ankur Handicraft</h3>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Handcrafted furniture that brings art into your home. Each piece tells a story of tradition and craftsmanship.
+            Handcrafted metal craft that brings art into your home. Each piece tells a story of tradition and craftsmanship.
           </p>
         </div>
         <div>

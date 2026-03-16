@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { MessageCircle, Phone } from "lucide-react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ userName: "", number: "", message: "" });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const BASE_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : "https://ankur-handicraft.onrender.com";
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const msg = `Hi, I'm ${form.name}. ${form.message} (Phone: ${form.phone})`;
-    window.open(getWhatsAppUrl(msg), "_blank");
+    setLoading(true);
+    try {
+      const response = await axios.post(`${BASE_URL}/inquiry/add`, form);
+      if (response.status === 200 || response.status === 201 || response.data.type === 'success') {
+        toast.success("Inquiry sent successfully!");
+        setForm({ userName: "", number: "", message: "" });
+      } else {
+        toast.error(response.data.message || "Failed to send inquiry");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send inquiry");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <main className="pt-20">
@@ -70,8 +92,8 @@ const Contact = () => {
                 <input
                   type="text"
                   required
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  value={form.userName}
+                  onChange={(e) => setForm({ ...form, userName: e.target.value })}
                   className="w-full bg-background border border-input rounded-md px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="Your name"
                 />
@@ -81,8 +103,8 @@ const Contact = () => {
                 <input
                   type="tel"
                   required
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  value={form.number}
+                  onChange={(e) => setForm({ ...form, number: e.target.value })}
                   className="w-full bg-background border border-input rounded-md px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="Your phone number"
                 />
@@ -100,9 +122,10 @@ const Contact = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground font-medium py-3 rounded-md hover:opacity-90 transition-opacity text-sm"
+                disabled={loading}
+                className="w-full bg-primary text-primary-foreground font-medium py-3 rounded-md hover:opacity-90 transition-opacity text-sm disabled:opacity-50"
               >
-                Send via WhatsApp
+                {loading ? "Sending..." : "Send"}
               </button>
             </form>
           </div>

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const inquirySchema = new mongoose.Schema({
     userName: { type: String, required: true },
     number: { type: String, required: true },
+    email: { type: String, required: false },
     message: { type: String, required: true },
     product: {
         type: mongoose.Schema.Types.ObjectId,

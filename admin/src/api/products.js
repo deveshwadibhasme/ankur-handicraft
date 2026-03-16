@@ -2,6 +2,9 @@ import { request } from "../utils/axios";
 
 export const getProducts = () => request("/api/products/all-products");
 
+export const getInquiry = () => request("/inquiry/all-inquries", { auth: true });
+
+
 export const createProduct = (product) => {
   const formData = new FormData();
   formData.append("name", product.name);

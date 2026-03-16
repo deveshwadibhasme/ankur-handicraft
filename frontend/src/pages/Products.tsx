@@ -46,7 +46,7 @@ const Products = () => {
         <div className="container">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground text-center mb-4">Our Collection</h1>
           <p className="text-muted-foreground text-center text-lg mb-12 max-w-2xl mx-auto">
-            Browse our handcrafted furniture and artistic wooden décor. Each piece is unique and made to order.
+            Browse our handcrafted metal craft and artistic metal  décor. Each piece is unique and made to order.
           </p>
           {loading ? (
             <div className="text-center py-10">Loading collection...</div>

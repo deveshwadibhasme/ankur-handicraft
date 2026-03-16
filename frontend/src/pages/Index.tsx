@@ -5,10 +5,10 @@ import ProductCard from "@/components/ProductCard";
 import { useEffect, useState } from "react";
 
 // const featuredProducts = [
-//   { image: product1, name: "Artisan Wooden Bowl", description: "Hand-turned decorative bowl with natural wood grain." },
+//   { image: product1, name: "Artisan metal  Bowl", description: "Hand-turned decorative bowl with natural wood grain." },
 //   { image: product2, name: "Carved Bookshelf", description: "Ornately carved bookshelf with classic design details." },
 //   { image: product3, name: "Heritage Coffee Table", description: "Sculpted coffee table with traditional carved legs." },
-//   { image: product4, name: "Woven Seat Chair", description: "Classic wooden chair with handwoven rush seat." },
+//   { image: product4, name: "Woven Seat Chair", description: "Classic metal  chair with handwoven rush seat." },
 // ];
 
 const Index = () => {
@@ -21,23 +21,26 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/api/products/featured`)
-      .then((res) => res.json())
-      .then((data) => {
-        setFeaturedProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching featured products:", err);
-        setLoading(false);
-      });
+    const fetchFeaturedProducts = () => {
+      fetch(`${BASE_URL}/api/product/featured`)
+        .then((res) => res.json())
+        .then((data) => {
+          setFeaturedProducts(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching featured products:", err);
+          setLoading(false);
+        });
+    };
+    fetchFeaturedProducts();
   }, []);
 
   return (<main>
     {/* Hero */}
     <section className="relative min-h-[90vh] flex items-center">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Handcrafted wooden furniture in a warm room" className="w-full h-full object-cover" />
+        <img src={heroImg} alt="Handcrafted metal  metal craft in a warm room" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-foreground/40" />
       </div>
       <div className="container relative z-10 py-20">

@@ -35,12 +35,12 @@ router.get('/api/products/:category', async (req, res) => {
     return res.json(products);
 });
 
-router.get('/api/products/featured', async (req, res) => {
+router.get('/api/product/featured', async (req, res) => {
     try {
         const featuredProducts = await Product.find({ isFeatured: true });
-        res.json(featuredProducts);
+        return res.status(200).json(featuredProducts);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 });
 
