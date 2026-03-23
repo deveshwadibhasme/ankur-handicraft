@@ -12,7 +12,7 @@ interface InquiryFormProps {
 const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000"
-    : "https://ankur-handicraft.onrender.com";
+    : "server.ankurhandicraft.com";
 
 const InquiryForm = ({ productId, productName, onClose }: InquiryFormProps) => {
   const [formData, setFormData] = useState({

@@ -1,0 +1,71 @@
+name: Deploy Apps to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: frontend
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: frontend
+
+      # ADMIN
+      - name: Install admin dependencies
+        run: npm install
+        working-directory: admin
+
+      - name: Build admin
+        run: npm run build
+        working-directory: admin
+
+      # Upload client
+      - name: Uploadfrontend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: frontend/dist/
+          server-dir: public_html/
+
+      # Upload admin
+      - name: Upload admin
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: admin/dist/
+          server-dir: public_html/admin/
+
+      # Upload Backend
+      - name: Deploy backend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER_B }}
+          username: ${{ secrets.FTP_USERNAME_B }}
+          password: ${{ secrets.FTP_PASSWORD_B }}
+          port: 21
+          local-dir: backend/
+          server-dir: /home/u96955828/nodejs/
+          exclude: |
+            **/node_modules/**
+            **/.git/**
+            **/.env
