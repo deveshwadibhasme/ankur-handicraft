@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "https://ankurhandicraft.com" }));
 app.use(express.json());
 
 

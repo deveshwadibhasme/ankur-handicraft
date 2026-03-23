@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: frontend/dist/
-          server-dir: /
+          server-dir: /public_html
 
       # Upload admin
       - name: Upload admin
@@ -53,7 +53,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: admin/dist/
-          server-dir: /admin/
+          server-dir: /public_html/admin/
 
       # Upload Backend
       - name: Deploy backend
@@ -64,7 +64,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_B }}
           port: 21
           local-dir: backend/
-          server-dir: /home/u96955828/nodejs/
+          server-dir: /home/u969558282.server.ankurhandicraft.com/nodejs/
           exclude: |
             **/node_modules/**
             **/.git/**
