@@ -36,14 +36,14 @@ jobs:
         working-directory: admin
 
       # Upload client
-      - name: Uploadfrontend
+      - name: Upload Frontend
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: frontend/dist/
-          server-dir: public_html/
+          server-dir: /
 
       # Upload admin
       - name: Upload admin
@@ -53,7 +53,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: admin/dist/
-          server-dir: public_html/admin/
+          server-dir: /admin/
 
       # Upload Backend
       - name: Deploy backend
