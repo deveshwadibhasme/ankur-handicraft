@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    service: 'smtp-relay.brevo.com',
+    host: 'smtp-relay.brevo.com',
+    port: 587,
     auth: {
         user: process.env.USER,
         pass: process.env.PASS,
@@ -15,7 +16,7 @@ export const sendInquiryEmail = async (inquiryData) => {
     const { userName, email, number, message, productName } = inquiryData;
 
     const adminMailOptions = {
-        from: 'Ankur Handicrafts <no-reply@ankurhandicraft.com>',
+        from: 'Ankur Handicraft <info@ankurhandicraft.com>',
         to: 'ankurhandicrafts1@gmail.com',
         subject: `New Inquiry from ${userName} - Ankur Handicraft`,
         html: `
@@ -35,7 +36,7 @@ export const sendInquiryEmail = async (inquiryData) => {
     };
 
     const userMailOptions = {
-        from: process.env.USER,
+        from: 'Ankur Handicraft <info@ankurhandicraft.com>',
         to: email,
         subject: `Thank you for your inquiry - Ankur Handicraft`,
         html: `
