@@ -15,7 +15,7 @@ const Index = () => {
   const BASE_URL =
     window.location.hostname === "localhost"
       ? "http://localhost:5000"
-      : "server.ankurhandicraft.com";
+      : "https://server.ankurhandicraft.com";
 
   const [featuredProducts, setFeaturedProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);

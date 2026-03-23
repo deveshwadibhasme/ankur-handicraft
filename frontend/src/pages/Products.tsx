@@ -21,7 +21,7 @@ const Products = () => {
   const baseURI =
     window.location.hostname === "localhost"
       ? "http://localhost:5000"
-      : "server.ankurhandicraft.com";
+      : "https://server.ankurhandicraft.com";
 
   useEffect(() => {
     const path = pathname.split("/")[2];

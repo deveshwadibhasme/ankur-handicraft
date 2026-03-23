@@ -11,7 +11,7 @@ const Contact = () => {
   const BASE_URL =
     window.location.hostname === "localhost"
       ? "http://localhost:5000"
-      : "server.ankurhandicraft.com";
+      : "https://server.ankurhandicraft.com";
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
