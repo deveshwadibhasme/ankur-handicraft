@@ -55,17 +55,17 @@ jobs:
           local-dir: admin/dist/
           server-dir: /public_html/admin/
 
-      # Upload Backend
-      - name: Deploy backend
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER_B }}
-          username: ${{ secrets.FTP_USERNAME_B }}
-          password: ${{ secrets.FTP_PASSWORD_B }}
-          port: 21
-          local-dir: backend/
-          server-dir: /home/u969558282/nodejs/
-          exclude: |
-            **/node_modules/**
-            **/.git/**
-            **/.env
+      # # Upload Backend
+      # - name: Deploy backend
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER_B }}
+      #     username: ${{ secrets.FTP_USERNAME_B }}
+      #     password: ${{ secrets.FTP_PASSWORD_B }}
+      #     port: 21
+      #     local-dir: backend/
+      #     server-dir: /home/u969558282/nodejs/
+      #     exclude: |
+      #       **/node_modules/**
+      #       **/.git/**
+      #       **/.env

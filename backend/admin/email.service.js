@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    service: 'smtp-relay.brevo.com',
+    service: 'gmail',
     auth: {
         user: process.env.USER,
         pass: process.env.PASS,
