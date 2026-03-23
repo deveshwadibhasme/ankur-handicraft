@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
         const productDoc = productId ? await Product.findById(productId) : null;
 
         await newInquiry.save();
-        // await sendInquiryEmail({ userName, email, number, message, productName: productDoc?.name });
+        await sendInquiryEmail({ userName, email, number, message, productName: productDoc?.name });
         res.status(201).json({ type: 'success', message: 'Inquiry sent successfully' });
     } catch (error) {
         res.status(400).json({ type: 'error', message: error.message });
