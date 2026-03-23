@@ -64,7 +64,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_B }}
           port: 21
           local-dir: backend/
-          server-dir: /home/u969558282.server.ankurhandicraft.com/nodejs/
+          server-dir: /home/u969558282/nodejs/
           exclude: |
             **/node_modules/**
             **/.git/**
