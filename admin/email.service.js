@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'smtp-relay.brevo.com',
     auth: {
         user: process.env.USER,
         pass: process.env.PASS,
@@ -15,7 +15,7 @@ export const sendInquiryEmail = async (inquiryData) => {
     const { userName, email, number, message, productName } = inquiryData;
 
     const adminMailOptions = {
-        from: process.env.USER,
+        from: 'Ankur Handicrafts <no-reply@ankurhandicraft.com>',
         to: 'ankurhandicrafts1@gmail.com',
         subject: `New Inquiry from ${userName} - Ankur Handicraft`,
         html: `
