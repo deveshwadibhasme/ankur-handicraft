@@ -53,6 +53,7 @@ router.post('/api/products', protect, upload.single('image'), async (req, res) =
 
         if (req.file) {
             imageUrl = `https://server.ankurhandicraft.com/products-image/${req.file.filename}`;
+            const __dirname = path.resolve();
             console.log(
                 'Is This Exist: ', fs.existsSync(path.join(__dirname, `products-image`))
             );
