@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import Product from './model/Product.js';
 import { imagekit, upload } from './upload.config.js';
+import fs from "fs";
 const router = express.Router()
 
 dotenv.config();
@@ -51,7 +52,10 @@ router.post('/api/products', protect, upload.single('image'), async (req, res) =
         let imageUrl = "";
 
         if (req.file) {
-            imageUrl = `/products/${req.file.filename}`;
+            imageUrl = `https://server.ankurhandicraft.com/products-image/${req.file.filename}`;
+            console.log(
+                'Is This Exist: ', fs.existsSync(`/home/u969558282/files/nodejs/products-image/${req.file.filename}.png`)
+            );
         }
 
         const newProduct = new Product({
@@ -77,7 +81,7 @@ router.put('/api/products/:id', protect, upload.single('image'), async (req, res
         let updateData = { name, description, material, category, price, dimensions, isFeatured };
 
         if (req.file) {
-            updateData.image = `/products/${req.file.filename}`;
+            updateData.image = `/products-image/${req.file.filename}`;
         }
 
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });
