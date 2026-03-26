@@ -28,7 +28,7 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use(
   "/products-image",
-  express.static("/home/u969558282/ef5a6c54326d6fc7/files/nodejs/products-image")
+  express.static(path.join(__dirname, "products-image"))
 );
 
 
