@@ -51,12 +51,7 @@ router.post('/api/products', protect, upload.single('image'), async (req, res) =
         let imageUrl = "";
 
         if (req.file) {
-            const uploadResponse = await imagekit.upload({
-                file: req.file.buffer,
-                fileName: generateUniqueFileName(req.file.originalname),
-                folder: '/products'
-            });
-            imageUrl = uploadResponse.url;
+            imageUrl = `/products/${req.file.filename}`;
         }
 
         const newProduct = new Product({
@@ -82,12 +77,7 @@ router.put('/api/products/:id', protect, upload.single('image'), async (req, res
         let updateData = { name, description, material, category, price, dimensions, isFeatured };
 
         if (req.file) {
-            const uploadResponse = await imagekit.upload({
-                file: req.file.buffer,
-                fileName: generateUniqueFileName(req.file.originalname),
-                folder: '/products'
-            });
-            updateData.image = uploadResponse.url;
+            updateData.image = `/products/${req.file.filename}`;
         }
 
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });
