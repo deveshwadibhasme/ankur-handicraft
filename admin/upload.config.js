@@ -14,7 +14,7 @@ export const imagekit = new ImageKit({
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Hostinger NVMe storage path (adjust folder name as needed)
-        cb(null, '/products');
+        cb(null, 'products/');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
