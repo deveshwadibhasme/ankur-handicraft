@@ -26,8 +26,10 @@ const allowedOrigins = [
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
-const __dirname = path.resolve();
-app.use("/products-image", express.static(path.join(__dirname, "products-image")));
+app.use(
+  "/products-image",
+  express.static("/srv1836-files/ef5a6c54326d6fc7/files/nodejs/products-image")
+);
 
 
 app.post('/auth/admin/login', async (req, res) => {
