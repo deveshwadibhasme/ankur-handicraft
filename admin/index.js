@@ -20,11 +20,13 @@ const allowedOrigins = [
   "https://admin.ankurhandicraft.com",
   "http://localhost:5173",
   "http://localhost:5174",
-  "http://localhost:8080"
+  "http://localhost:8080",
+  "https://server.ankurhandicraft.com"
 ];
 
-app.use(cors({ origin: allowedOrigins }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
+const __dirname = path.resolve();
 app.use("/products-image", express.static(path.join(__dirname, "products-image")));
 
 
