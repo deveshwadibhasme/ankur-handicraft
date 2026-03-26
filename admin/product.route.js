@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import Product from './model/Product.js';
 import { imagekit, upload } from './upload.config.js';
 import fs from "fs";
+import path from 'path';
 const router = express.Router()
 
 dotenv.config();
