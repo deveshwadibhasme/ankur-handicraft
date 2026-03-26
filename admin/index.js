@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './db.js';
 import jwt from 'jsonwebtoken';
@@ -24,6 +25,7 @@ const allowedOrigins = [
 
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
+app.use("/products-image", express.static(path.join(__dirname, "products-image")));
 
 
 app.post('/auth/admin/login', async (req, res) => {
