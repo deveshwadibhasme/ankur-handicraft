@@ -101,7 +101,7 @@ function ProductList({}) {
   }
 
   return (
-    <div className="ml-2 grid grid-cols-1 lg:grid-cols-2 max-h-130 w-full overflow-y-auto h-full gap-3 p-4">
+    <div className="ml-2 grid grid-cols-1 lg:grid-cols-2 max-h-180 w-full mt-10 md:mt-2 overflow-y-auto h-full gap-3 p-4">
       {products?.map((product) => (
         <article
           key={product._id}

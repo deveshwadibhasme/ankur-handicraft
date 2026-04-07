@@ -8,6 +8,7 @@ interface Product {
   description: string;
   material?: string;
   category: string;
+  oldPrice: number,
   price?: number;
   dimensions?: string;
   isFeatured?: boolean;

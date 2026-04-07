@@ -11,6 +11,7 @@ export const createProduct = (product) => {
   formData.append("description", product.description);
   formData.append("material", product.material);
   formData.append("category", product.category);
+  formData.append("oldPrice", product.oldPrice);
   formData.append("price", product.price);
   formData.append("dimensions", product.dimensions);
   formData.append("isFeatured", product.isFeatured);
@@ -27,6 +28,8 @@ export const updateProduct = (id, product) => {
   formData.append("description", product.description);
   formData.append("material", product.material);
   formData.append("category", product.category);
+  formData.append("oldPrice", product.oldPrice);
+
   formData.append("price", product.price);
   formData.append("dimensions", product.dimensions);
   formData.append("isFeatured", product.isFeatured);
