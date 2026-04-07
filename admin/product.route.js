@@ -49,7 +49,7 @@ router.get('/api/product/featured', async (req, res) => {
 
 router.post('/api/products', protect, upload.single('image'), async (req, res) => {
     try {
-        const { name, description, material, category, price, dimensions, isFeatured } = req.body;
+        const { name, description, material, category, oldPrice, price, dimensions, isFeatured } = req.body;
         let imageUrl = "";
 
         if (req.file) {
@@ -61,6 +61,7 @@ router.post('/api/products', protect, upload.single('image'), async (req, res) =
             description,
             material,
             category,
+            oldPrice,
             price,
             dimensions,
             image: imageUrl,
@@ -75,14 +76,14 @@ router.post('/api/products', protect, upload.single('image'), async (req, res) =
 
 router.put('/api/products/:id', protect, upload.single('image'), async (req, res) => {
     try {
-        const { name, description, material, category, price, dimensions, isFeatured } = req.body;
-        let updateData = { name, description, material, category, price, dimensions, isFeatured };
+        const { name, description, material, category, oldPrice, price, dimensions, isFeatured } = req.body;
+        let updateData = { name, description, material, category, oldPrice, price, dimensions, isFeatured };
 
         if (req.file) {
             updateData.image = `https://server.ankurhandicraft.com/products-image/${req.file.filename}`;
         }
 
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, updateData, { returnDocument: 'after' });
         res.json(updatedProduct);
     } catch (error) {
         res.status(400).json({ message: error.message });
