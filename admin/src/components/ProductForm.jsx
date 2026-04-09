@@ -100,6 +100,7 @@ function ProductForm({
             <option value="memento-corporate">Memento & Corporate</option>
             <option value="traditional">Traditional</option>
             <option value="religious-art">Religious Art</option>
+            <option value="cnc-product">CNC Product</option>
           </select>
         </div>
 

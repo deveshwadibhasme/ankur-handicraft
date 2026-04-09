@@ -14,6 +14,7 @@ const links = [
       { to: "/products/memento-corporate", label: "Memento & Corporate" },
       { to: "/products/traditional", label: "Traditional Art" },
       { to: "/products/religious-art", label: "Religious Art" },
+      { to: "/products/cnc-product", label: "CNC Product" },
     ],
   },
   { to: "/contact", label: "Contact" },

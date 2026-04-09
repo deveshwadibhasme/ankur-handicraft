@@ -50,11 +50,24 @@ const ProductCard = ({ _id, image, name, description, material, dimensions, oldP
                   <span className="text-primary/70 font-bold uppercase text-[10px] tracking-wider block">Dimensions</span>
                   <p className="text-foreground font-semibold truncate">{dimensions}</p>
                 </div>}
-              {material &&
-                <div className="col-span-2">
-                  <span className="text-primary/70 font-bold uppercase text-[10px] tracking-wider block">Material</span>
-                  <p className="text-foreground font-semibold break-words overflow-clip text-wrap whitespace-nowrap">{material}</p>
-                </div>}
+              <div className="col-span-2">
+                <p className={`text-muted-foreground text-xs leading-relaxed break-words whitespace-normal overflow-y-auto overflow-x-hidden max-h-20  ${!isExpanded ? "line-clamp-2" : ""}`}>
+                  {description}
+                </p>
+                {description.length > 60 && (
+                  <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-primary text-[10px] font-bold uppercase tracking-wider mt-1 hover:underline"
+                  >
+                    {isExpanded ? "Show Less" : "Know More"}
+                  </button>
+                )}
+                {material &&
+                  <div className="col-span-1">
+                    <span className="text-primary font-bold uppercase text-[12px] tracking-wider block">Material</span>
+                    <p className="text-foreground font-semibold break-words overflow-clip text-wrap whitespace-nowrap">{material}</p>
+                  </div>}
+              </div>
             </div>
           )}
           <div className="flex gap-2">
@@ -73,22 +86,9 @@ const ProductCard = ({ _id, image, name, description, material, dimensions, oldP
               Send Inquiry Email
             </button>
           </div>
-          <div className="mt-3">
-            <p className={`text-muted-foreground text-xs leading-relaxed break-words whitespace-normal overflow-y-auto overflow-x-hidden max-h-20  ${!isExpanded ? "line-clamp-2" : ""}`}>
-              {description}
-            </p>
-            {description.length > 60 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="text-primary text-[10px] font-bold uppercase tracking-wider mt-1 hover:underline"
-              >
-                {isExpanded ? "Show Less" : "Know More"}
-              </button>
-            )}
-          </div>
+
         </div>
       </div>
-
       {showInquiry && (
         <InquiryForm
           productId={_id}
